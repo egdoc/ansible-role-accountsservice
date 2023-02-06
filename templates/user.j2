@@ -1,0 +1,7 @@
+[User]
+Language={{ outer_item.language }}
+Icon={{ accountsservice_icons_dir }}/{{ outer_item.name }}
+{% if outer_item.xsession is defined %}
+Xsession={{ outer_item.xsession }}
+{% endif %}
+SystemAccount={{ outer_item.system_account | default(false) | bool | to_json }}

@@ -1,0 +1,3 @@
+---
+accountsservice_icons_dir: /var/lib/AccountsService/icons
+accountsservice_users_dir: /var/lib/AccountsService/users

@@ -1,0 +1,14 @@
+---
+- name: Converge
+  hosts: all
+  gather_facts: false
+  become: true
+  tasks:
+    - name: "Include egdoc.accountsservice"
+      ansible.builtin.include_role:
+        name: "egdoc.accountsservice"
+      vars:
+        accountsservice_users:
+          - name: vagrant
+            language: en_US.UTF-8
+            icon: https://avatars.githubusercontent.com/u/19516755?v=4

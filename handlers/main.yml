@@ -1,0 +1,5 @@
+---
+- name: Restart accounts-daemon service
+  ansible.builtin.systemd:
+    name: accounts-daemon
+    state: restarted

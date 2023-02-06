@@ -1,0 +1,27 @@
+---
+- name: Download image
+  ansible.builtin.get_url:
+    url: '{{ outer_item.icon }}'
+    dest: '{{ accountsservice_icons_dir }}/{{ outer_item.name }}'
+    owner: root
+    group: root
+    mode: '644'
+  when: outer_item.icon is regex('^(http|https|ftp)://')
+
+- name: Copy image into place
+  ansible.builtin.copy:
+    src: '{{ outer_item.icon }}'
+    dest: '{{ accountsservice_icons_dir }}/{{ outer_item.name }}'
+    owner: root
+    group: root
+    mode: '644'
+  when: outer_item.icon is not regex('^(http|https|ftp)://')
+
+- name: Ensure configuration is written
+  ansible.builtin.template:
+    src: user.j2
+    dest: '{{ accountsservice_users_dir }}/{{ outer_item.name }}'
+    owner: root
+    group: root
+    mode: '600'
+  notify: Restart accounts-daemon service
